@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knockout.js • TodoMVC</title>
+  <link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+  <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+</head>
+<body>
+  <section class="todoapp">
+    <header class="header">
+      <h1>todos</h1>
+      <input type="text" class="new-todo" data-bind="value: current, valueUpdate: 'afterkeydown', enterKey: add" placeholder="What needs to be done?" autofocus="autofocus">
+      <section class="main" data-bind="visible: todos().length">
+        <input type="text" id="toggle-all" class="toogle-all" data-bind="checked: allCompleted" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list" data-bind="foreach: filteredTodos">
+          <li data-bind="css: { completed: completed, editing: editing }">
+            <div class="view">
+              <input type="cehckbox" class="toggle" data-bind="checked: completed">
+              <label for="" data-bind="text: title, event: { dblclick: 1root.editItem }"></label>
+              <button class="destroy" data-bind="click: $root.remove"></button>
+            </div>
+            input.edit[data-bind="value: title, valueUpdate: 'afterkeydown', enterKey: $root.saveEditiing, escapekey: $root.cancelEditing, selectAndFocus: editing, event: { blur: $roout.saveEditiing } "]
+          </li>
+        </ul>
+      </section> 
+      <footer class="footer" data-bind="visible: completedCount() || remainingCount()">
+        <span class="todo-count">
+          <strong data-bind="text: remainingCount">0</strong>
+          <span data-bind="text: getLabel(remainingCount)"></span>left
+        </span>
+        <ul class="filters">
+          <li>
+            <a href="#/all" data-bind="css: { selected: showMode() == 'all' }">All</a>
+            <a href="#/active" data-bind="css: { selected: showMode() == 'active' }">Active</a>
+            <a href="#/completed" data-bind="css: { selected: showMode() === 'Completed' }">Completed</a>
+          </li>
+        </ul>
+        <button class="clear-completed" data-bind="visible: completedCount, click: removeCompleted">Clear Completed</button>
+      </footer>  
+    </header>
+  </section>
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+    <p>Written by <a href="https://github.com/ashish01/knockoutjs-todos">Ashish Sharma</a> and <a href="http://knockmeout.net">Ryan Niemeyer</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  </footer>
+  <script src="node_modules/todomvc-common/base.js"></script>
+  <script src="node_modules/knockout/build/output/knockout-latest.js"></script>
+  <script src="node_modules/director/build/director.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
