@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVC</title>
+  <style>
+    .del {
+      margin-left: 5px;
+    }
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <section class="todoapp">
+    <h1>Todo App</h1>
+    <input type="text" class="new-todo" placeholder="what needs to be done?" autofocus="autofocus">
+    <ul class="todo-list"></ul>
+  </section>
+  <footer>
+    <span class="todo-count"></span>
+  </footer>
+
+  <script src="./eventemitter.js"></script>
+  <script src="./model.js"></script>
+  <script src="./template.js"></script>
+  <script src="./view.js"></script>
+  <script src="./controller.js"></script>
+  <script>
+    var controller = new Controller();
+  </script>
+</body>
+</html>
