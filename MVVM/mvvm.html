@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVVM</title>
+  <style>
+    .del {
+      margin-left: 5px;
+    }
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>  
+  <div id="app">
+    <section class="todoapp">
+      <h1>Todo App</h1>
+      <input v-model="newTodo" v-on:keydown.enter="addTodo" type="text" class="new-todo" placeholder="what needs to be done?" autofocus="autofocus">
+      <ul class="todo-list">
+        <li
+          v-for="todo in todos"
+          :class="{completed: todo.completed}"
+        >
+          <label v-on:click="editTodo(todo)">{{ todo.title }}</label>
+          <button v-on:click="removeTodo(todo)" class="del">x</button>
+        </li>
+      </ul>
+    </section>
+    <footer>
+      <span class="todo-count">
+        待办事项还剩
+        <strong>{{unCompletedTodos.length}}</strong> 件
+      </span>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        todos: [],
+        newTodo: '',
+      },
+      methods: {
+        addTodo: function() {
+          var value = this.newTodo && this.newTodo.trim();
+
+          if (!value) return;
+          
+          this.todos.push({ id: Date.now(),title: value, completed: false });
+          this.newTodo = '';
+        },
+
+        removeTodo: function(todo) {
+          var index = this.todos.indexOf(todo);
+          this.todos.splice(index, 1);
+        },
+        editTodo: function(todo) {
+          todo.completed = !todo.completed;
+        }
+      },
+      computed: {
+        unCompletedTodos: function() {
+          return this.todos.filter(todo => !todo.completed);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
