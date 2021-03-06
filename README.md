@@ -1,6 +1,11 @@
-从实现一个简单的todo开始。
+## 问题
 
-## 原始版
+- [x] 为什么会有MVC：解决了什么场景下的什么问题
+- [x] 为什么会有MVVM：解决了什么场景下的什么问题
+
+## 实践
+从实现一个简单的todo开始。
+### 原始版
 [原始版代码](./vanillajs/index.html)
 
 这样的代码的复杂度在于dom结构和状态耦合在一起。耦合意味着某个数据的结果依赖于其他数据的计算。也就是说dom的修改可能会引起状态的变化。而这个变化不一定是我们期待的变化，即会引出bug。
@@ -15,7 +20,7 @@ let todoTemplate = '<li class="{{completed}} todo">'
 
 原来我们是通过`!el.className`逻辑来筛选未完成的待办事项。而当我们对todoTemplate做了如上修改后，便会出现bug。
 
-## MVC
+### MVC
 
 现在我们使用MVC模式来重构代码:
 [MVC版代码](./MVC/MVC.html)
@@ -42,31 +47,16 @@ Model负责管理数据的增删查改。View层则负责管理DOM的增删查�
 
 通过MVC模式编写代码，我们需要手动操作DOM，随着view的膨胀，我们需要操作的DOM就越来越多，代码的复杂度也越高。
 
-## MVVM
+### MVVM
 现在我们使用MVVM框架`vue`来重构代码。
 
 [MVVM版代码](./MVVM/mvvm.html)
 
 所以MVVM的目的是当model层发生变化时，view层能够自动更新。而不用我们手动操作DOM，从而减少代码的复杂度。
 
-
-
-[浅析前端开发中的 MVC/MVP/MVVM 模式
-](https://juejin.cn/post/6844903480126078989)
-
+## 参考资料
+[浅析前端开发中的 MVC/MVP/MVVM 模式](https://juejin.cn/post/6844903480126078989)
 [界面之下：还原真实的MV*模式 #](https://github.com/livoras/blog/issues/11)
-
-[相比于原生 JavaScript，现在流行的 JS 框架 React 和 Vue 都解决了什么问题？
-](https://www.zhihu.com/question/358226500)
-
-[【javascript激增的思考03】MVVM与Knockout
-](https://www.cnblogs.com/yexiaochai/p/3148382.html)
-
-[250行实现一个简单的MVVM
-](https://zhuanlan.zhihu.com/p/24475845)
-
-[mvc-mvp-mvvm
-](https://github.com/shuizhubocai/mvc-mvp-mvvm)
-
-[Building React From Scratch
-](https://github.com/zpao/building-react-from-scratch)
+[相比于原生 JavaScript，现在流行的 JS 框架 React 和 Vue 都解决了什么问题？](https://www.zhihu.com/question/358226500)
+[javascript激增的思考03】MVVM与Knockout](https://www.cnblogs.com/yexiaochai/p/3148382.html)
+[mvc-mvp-mvvm](https://github.com/shuizhubocai/mvc-mvp-mvvm)
