@@ -4,51 +4,103 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VanillaJS • TodoMVC</title>
-  <link rel="stylesheet" href="node_modules/todomvc-common/base.css">
-  <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+  <title>Document</title>
+  <style>
+    .del {
+      margin-left: 5px;
+    }
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
 </head>
 <body>
   <section class="todoapp">
-    <section class="header">
-      <h1>todos</h1>
-      <input type="text" class="new-todo" placeholder="what needs to be done?" autofocus>
-    </section>
-    <section class="main">
-      <input type="checkbox" id="toogle-all" class="toogle-all">
-      <label for="toggle-all">Mark all as complete</label>
-      <ul class="todo-list">
-        
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count"></span>
-      <ul class="filters">
-        <li>
-          <a href="#/" class="selected">All</a>
-        </li>
-        <li>
-          <a href="#/active">Active</a>
-        </li>
-        <li>
-          <a href="#/completed">Complete</a>
-        </li>
-      </ul>
-      <button class="clear-completed">Clear completed</button>
-    </footer>
+    <h1>Todo App</h1>
+    <input type="text" class="new-todo" placeholder="what needs to be done?" autofocus="autofocus">
+    <ul class="todo-list">
+    </ul>
   </section>
-  <footer class="info">
-    <p>Double-click to edit a todo</p>
-    <p>Created by <a href="http://twitter.com/oscargodson">Oscar Godson</a></p>
-    <p>Refactored by <a href="https://github.com/cburgmer">Christoph Burgmer</a></p>
-    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  <footer>
+    <span class="todo-count"></span>
   </footer>
-  <script src="js/helper.js"> </script>
-  <script src="js/store.js"></script>
-  <script src="js/model.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/view.js"></script>
-  <script src="js/controller.js"></script>
-  <script src="js/app.js"></script>
+  <script>
+
+
+    // 模板解析
+    let Template = {
+      getTodoTemplate(todo) {
+        let template = '<li class="{{completed}}">' 
+            + '<label>{{value}}</label>' 
+            + '<button class="del">x</button>'
+          '</li>';
+        template = template.replace('{{value}}', todo.title);
+        template = template.replace('{{completed}}', todo.completed ? 'completed' : '');
+
+        return template;
+      },
+      getTodoCounterTemplate(len) {
+        return '待办事项还剩' + '<strong>'  + len + '</strong>' + ' 件';
+      }
+    }
+
+    // 获取DOM元素
+    let newTodo = document.querySelector('.new-todo');
+    let todoList = document.querySelector('.todo-list');
+    let todoCount = document.querySelector('.todo-count');
+
+    // 给DOM元素绑定事件，响应交互
+    newTodo.addEventListener('keydown', (e) => {
+      if (e.keyCode === 13) {
+        let value = e.target.value;
+        let completed = false;
+
+        if (!value.trim()) return;
+                
+        // 操作DOM
+        let todoTemplate = Template.getTodoTemplate({ title: value, completed });
+        todoList.innerHTML += todoTemplate;
+        newTodo.value = '';
+        
+        
+        // 通过dom获取状态
+        let unCompletedTodos = Array.prototype.slice.call(todoList.children).filter((el) => !el.className);
+        
+        // 操作DOM
+        let todoCounterTemplate = Template.getTodoCounterTemplate(unCompletedTodos.length);
+        todoCount.innerHTML = todoCounterTemplate;
+        
+      }
+    });               
+
+    todoList.addEventListener('click', (e) => {
+      let target = e.target;
+
+      if (target.className === 'del') {
+        let li = target.parentElement;
+
+        // 操作DOM
+        todoList.removeChild(li);
+      
+        // 通过dom获取状态
+        let unCompletedTodos = Array.prototype.slice.call(todoList.children).filter((el) => !el.className);
+
+        // 操作DOM
+        todoCount.innerHTML =  Template.getTodoCounterTemplate(unCompletedTodos.length);
+      };
+
+      if (target.tagName.toLowerCase() === 'label') {
+        let li = target.parentElement;
+        let completed = li.className ? true : false;
+
+        // 操作DOM
+        li.className = completed ? '' : 'completed';
+        
+        // 通过dom获取状态
+        let unCompletedTodos = Array.prototype.slice.call(todoList.children).filter((el) => !el.className);
+        todoCount.innerHTML =  Template.getTodoCounterTemplate(unCompletedTodos.length);
+      }
+    });
+  </script>
 </body>
 </html>
