@@ -55,8 +55,8 @@ Model负责管理数据的增删查改。View层则负责管理DOM的增删查�
 所以MVVM的目的是当model层发生变化时，view层能够自动更新。而不用我们手动操作DOM，从而减少代码的复杂度。
 
 ## 参考资料
-[浅析前端开发中的 MVC/MVP/MVVM 模式](https://juejin.cn/post/6844903480126078989)
-[界面之下：还原真实的MV*模式 #](https://github.com/livoras/blog/issues/11)
-[相比于原生 JavaScript，现在流行的 JS 框架 React 和 Vue 都解决了什么问题？](https://www.zhihu.com/question/358226500)
-[javascript激增的思考03】MVVM与Knockout](https://www.cnblogs.com/yexiaochai/p/3148382.html)
-[mvc-mvp-mvvm](https://github.com/shuizhubocai/mvc-mvp-mvvm)
++ [浅析前端开发中的 MVC/MVP/MVVM 模式](https://juejin.cn/post/6844903480126078989)
++ [界面之下：还原真实的MV*模式 #](https://github.com/livoras/blog/issues/11)
++ [相比于原生 JavaScript，现在流行的 JS 框架 React 和 Vue 都解决了什么问题？](https://www.zhihu.com/question/358226500)
++ [javascript激增的思考03】MVVM与Knockout](https://www.cnblogs.com/yexiaochai/p/3148382.html)
++ [mvc-mvp-mvvm](https://github.com/shuizhubocai/mvc-mvp-mvvm)
